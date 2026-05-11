@@ -996,8 +996,8 @@
     border-radius: 2px;
   }
 
-  /* ========== VP CHAT BUTTON (Bottom Left Fixed) ========== */
-  .vp-chat-btn {
+ /* ========== VP CHAT BUTTON (WhatsApp) ========== */
+.vp-chat-btn {
     position: fixed;
     bottom: 30px;
     left: 30px;
@@ -1005,35 +1005,45 @@
     width: 56px;
     height: 56px;
     border-radius: 14px;
-    background: #0a3d8f;
+    background: #25D366;                    /* WhatsApp rəngi */
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    box-shadow: 0 4px 20px rgba(10,61,143,0.4), 0 0 0 0 rgba(10,61,143,0.3);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 
+                0 0 0 0 rgba(37, 211, 102, 0.3);
     animation: vpPulse 3s infinite;
     transition: transform 0.3s, box-shadow 0.3s;
-  }
+}
 
-  .vp-chat-btn:hover {
+.vp-chat-btn:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 28px rgba(10,61,143,0.5);
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
     animation: none;
-  }
+    background: #20c35a;
+}
 
-  .vp-chat-btn svg {
+.vp-chat-btn svg {
     width: 30px;
     height: 30px;
-  }
+    fill: white;
+}
 
-  @keyframes vpPulse {
-    0%, 100% { box-shadow: 0 4px 20px rgba(10,61,143,0.4), 0 0 0 0 rgba(10,61,143,0.3); }
-    50% { box-shadow: 0 4px 20px rgba(10,61,143,0.4), 0 0 0 10px rgba(10,61,143,0); }
-  }
+/* Pulse animasiyası (WhatsApp rənginə uyğun) */
+@keyframes vpPulse {
+    0%, 100% { 
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 
+                    0 0 0 0 rgba(37, 211, 102, 0.3); 
+    }
+    50% { 
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 
+                    0 0 0 12px rgba(37, 211, 102, 0); 
+    }
+}
 
-  /* VP tooltip */
-  .vp-chat-btn::after {
-    content: 'VP Biznes Chat';
+/* VP tooltip */
+.vp-chat-btn::after {
+    content: 'Birbaşa Əlaqə';
     position: absolute;
     left: calc(100% + 12px);
     top: 50%;
@@ -1051,9 +1061,11 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s;
-  }
+}
 
-  .vp-chat-btn:hover::after { opacity: 1; }
+.vp-chat-btn:hover::after { 
+    opacity: 1; 
+}
 
   /* ========== BACK TO TOP ========== */
   .back-top {
