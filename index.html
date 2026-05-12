@@ -1140,9 +1140,9 @@
 <!-- ============================================================ -->
 <script>
   const GITHUB = {
-    owner: 'Reynoncode', // ← öz GitHub istifadəçi adını yaz
-    repo:  'automaticdoors',       // ← öz repo adını yaz
-    branch: 'main'                 // ← branch adı (adətən main və ya master)
+    owner: 'Reynoncode', 
+    repo:  'automaticdoors',      
+    branch: 'main'               
   };
 </script>
 
@@ -1272,7 +1272,7 @@
 <!-- ============================================================
      GALLERY SƏHİFƏSİ — FAYL STRUKTURU:
      
-     photos/
+     images/
        1.png, 2.png, 3.png, 4.png
      
      videos/
@@ -1294,18 +1294,18 @@
   </p>
 
   <div class="gallery-tabs">
-    <button class="gallery-tab active" onclick="switchTab(this,'photos')"
-            data-az="Fotolar" data-ru="Фотографии" data-en="Photos">Fotolar</button>
+    <button class="gallery-tab active" onclick="switchTab(this,'images')"
+            data-az="Fotolar" data-ru="Фотографии" data-en="images">Fotolar</button>
     <button class="gallery-tab" onclick="switchTab(this,'videos')"
             data-az="Videolar" data-ru="Видео" data-en="Videos">Videolar</button>
   </div>
 
   <!-- ── FOTO PANELİ ── -->
-  <div class="gallery-panel active" id="photos">
+  <div class="gallery-panel active" id="images">
     <div class="gallery-grid" id="photoGrid">
-      <!-- 4 foto — photos/1.png … photos/4.png -->
-      <div class="gallery-item" onclick="openLightbox('photo','photos/1.png')">
-        <img src="photos/1.png" alt="Foto 1" loading="lazy"
+      <!-- 4 foto — images/1.png … images/4.png -->
+      <div class="gallery-item" onclick="openLightbox('photo','images/1.png')">
+        <img src="images/1.png" alt="Foto 1" loading="lazy"
              onerror="this.closest('.gallery-item').style.display='none'">
         <div class="gallery-overlay">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1314,8 +1314,8 @@
         </div>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox('photo','photos/2.png')">
-        <img src="photos/2.png" alt="Foto 2" loading="lazy"
+      <div class="gallery-item" onclick="openLightbox('photo','images/2.png')">
+        <img src="images/2.png" alt="Foto 2" loading="lazy"
              onerror="this.closest('.gallery-item').style.display='none'">
         <div class="gallery-overlay">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1324,8 +1324,8 @@
         </div>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox('photo','photos/3.png')">
-        <img src="photos/3.png" alt="Foto 3" loading="lazy"
+      <div class="gallery-item" onclick="openLightbox('photo','images/3.png')">
+        <img src="images/3.png" alt="Foto 3" loading="lazy"
              onerror="this.closest('.gallery-item').style.display='none'">
         <div class="gallery-overlay">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1334,8 +1334,8 @@
         </div>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox('photo','photos/4.png')">
-        <img src="photos/4.png" alt="Foto 4" loading="lazy"
+      <div class="gallery-item" onclick="openLightbox('photo','images/4.png')">
+        <img src="images/4.png" alt="Foto 4" loading="lazy"
              onerror="this.closest('.gallery-item').style.display='none'">
         <div class="gallery-overlay">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2173,7 +2173,7 @@ document.addEventListener('keydown', e => {
 
     try {
       const [imgRes, vidRes] = await Promise.all([
-        fetch(`${base}/photos?ref=${GITHUB.branch}`),
+        fetch(`${base}/images?ref=${GITHUB.branch}`),
         fetch(`${base}/videos?ref=${GITHUB.branch}`)
       ]);
 
@@ -2183,7 +2183,7 @@ document.addEventListener('keydown', e => {
       const photoFiles = Array.isArray(images) ? images.filter(f => IMAGE_EXTS.test(f.name)) : [];
       const videoFiles = Array.isArray(videos) ? videos.filter(f => VIDEO_EXTS.test(f.name)) : [];
 
-      renderPhotos(photoFiles);
+      renderimages(photoFiles);
       renderVideos(videoFiles);
     } catch (err) {
       console.warn('Gallery load error:', err);
