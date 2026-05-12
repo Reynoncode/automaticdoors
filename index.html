@@ -1140,8 +1140,8 @@
 <!-- ============================================================ -->
 <script>
   const GITHUB = {
-    owner: 'YOUR_GITHUB_USERNAME', // ← öz GitHub istifadəçi adını yaz
-    repo:  'YOUR_REPO_NAME',       // ← öz repo adını yaz
+    owner: 'Reynoncode', // ← öz GitHub istifadəçi adını yaz
+    repo:  'automaticdoors',       // ← öz repo adını yaz
     branch: 'main'                 // ← branch adı (adətən main və ya master)
   };
 </script>
@@ -2138,7 +2138,7 @@ document.addEventListener('keydown', e => {
 
     try {
       const [imgRes, vidRes] = await Promise.all([
-        fetch(`${base}/images?ref=${GITHUB.branch}`),
+        fetch(`${base}/photos?ref=${GITHUB.branch}`),
         fetch(`${base}/videos?ref=${GITHUB.branch}`)
       ]);
 
