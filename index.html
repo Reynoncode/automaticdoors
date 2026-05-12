@@ -1597,6 +1597,41 @@
 
 /* Əgər var(--gold-rgb) tanınmırsa fallback */
 :root { --gold-rgb: 180,145,60; }
+
+.gallery-item--video {
+  aspect-ratio: unset !important;
+  height: auto !important;
+}
+
+.gallery-item-wrap {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(180,145,60,0.15);
+}
+
+.gallery-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.04);
+  gap: 8px;
+}
+
+.gallery-info-title {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.gallery-info-price {
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 600;
+  white-space: nowrap;
+}
+  
 </style>
 
 <!-- ══════════════════════════════════════════
@@ -2156,55 +2191,51 @@ document.addEventListener('keydown', e => {
     }
   }
 
-  function renderPhotos(files) {
-    const grid = document.getElementById('photoGrid');
-    if (!files.length) {
-      grid.innerHTML = `
-        <div class="gallery-empty">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <p data-az="Hələ şəkil əlavə edilməyib.<br>images/ qovluğuna şəkil atın — avtomatik görünəcək." 
-             data-ru="Фото ещё не добавлены.<br>Добавьте в папку images/ — появятся автоматически."
-             data-en="No photos added yet.<br>Add images to the images/ folder — they'll appear automatically.">
-            Hələ şəkil əlavə edilməyib.<br>
-            <span style="font-size:0.78rem;opacity:0.6;">images/ qovluğuna şəkil atın — avtomatik görünəcək.</span>
-          </p>
-        </div>`;
-      return;
-    }
-    grid.innerHTML = files.map(f => `
-      <div class="gallery-item" onclick="openLightbox('${f.download_url}')">
-        <img src="${f.download_url}" alt="${f.name}" loading="lazy">
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-icon">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-          </div>
-        </div>
-      </div>`).join('');
-  }
-
   function renderVideos(files) {
     const grid = document.getElementById('videoGrid');
     if (!files.length) {
       grid.innerHTML = `
         <div class="gallery-empty">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-          <p data-az="Hələ video əlavə edilməyib.<br>videos/ qovluğuna video atın — avtomatik görünəcək."
-             data-ru="Видео ещё не добавлены.<br>Добавьте в папку videos/ — появятся автоматически."
-             data-en="No videos added yet.<br>Add videos to the videos/ folder — they'll appear automatically.">
-            Hələ video əlavə edilməyib.<br>
+          <p>Hələ video əlavə edilməyib.<br>
             <span style="font-size:0.78rem;opacity:0.6;">videos/ qovluğuna video atın — avtomatik görünəcək.</span>
           </p>
         </div>`;
       return;
     }
-    grid.innerHTML = files.map(f => `
-      <div class="gallery-item">
-        <video controls preload="metadata" style="width:100%;height:100%;object-fit:cover;">
-          <source src="${f.download_url}" type="video/${f.name.split('.').pop().replace('mov','mp4')}">
-        </video>
-      </div>`).join('');
-  }
 
+    const videoInfo = {
+      '1.mp4':  { title: 'Layihə adı',  price: '1500 AZN' },
+      '2.mp4':  { title: 'Layihə adı',  price: '800 AZN'  },
+      '3.mp4':  { title: 'Layihə adı',  price: '2000 AZN' },
+      '4.mp4':  { title: 'Layihə adı',  price: '1100 AZN' },
+      '5.mp4':  { title: 'Layihə adı',  price: '1300 AZN' },
+      '6.mp4':  { title: 'Layihə adı',  price: '900 AZN'  },
+      '7.mp4':  { title: 'Layihə adı',  price: '1700 AZN' },
+      '8.mp4':  { title: 'Layihə adı',  price: '2500 AZN' },
+      '9.mp4':  { title: 'Layihə adı',  price: '1050 AZN' },
+      '10.mp4': { title: 'Layihə adı',  price: '1900 AZN' },
+    };
+
+    grid.innerHTML = files.map(f => {
+      const info = videoInfo[f.name] || { title: f.name, price: '' };
+      const isFirst = f.name === '1.mp4';
+      return `
+        <div class="gallery-item-wrap">
+          <div class="gallery-item gallery-item--video">
+            <video controls preload="metadata" style="width:100%;display:block;"
+              ${isFirst ? 'autoplay muted playsinline' : ''}>
+              <source src="${f.download_url}" type="video/${f.name.split('.').pop().replace('mov','mp4')}">
+            </video>
+          </div>
+          <div class="gallery-info">
+            <span class="gallery-info-title">${info.title}</span>
+            ${info.price ? `<span class="gallery-info-price">${info.price}</span>` : ''}
+          </div>
+        </div>`;
+    }).join('');
+  }
+  
   function showGalleryPlaceholders() {
     // Show placeholder when GitHub not configured
     document.getElementById('photoGrid').innerHTML = `
